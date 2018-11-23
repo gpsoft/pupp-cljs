@@ -2,5 +2,6 @@ target/
 out/
 release/
 classes/
+node_modules/
 .nrepl-port
 .nrepl-history
