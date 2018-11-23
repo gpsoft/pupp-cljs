@@ -21,7 +21,7 @@ test:
 		--hostname $(CONTAINERNAME) \
 		--name $(CONTAINERNAME) \
 		--workdir /home/$(USER)/proj \
-		$(IMAGENAME) bash
+		$(IMAGENAME) /root/dev.sh
 
 # Start development
 .PHONY: dev attach
