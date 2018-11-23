@@ -2,31 +2,7 @@ FROM node:11.2.0-stretch
 
 WORKDIR /root
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libx11-xcb-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libxtst6 \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libnss3 \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libxss1 \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libasound2 \
-    && rm -rf /var/lib/apt/lists/*
-
+# Libs for puppeteer:
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#chrome-headless-doesnt-launch
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -71,6 +47,7 @@ RUN apt-get update \
         wget \
     && rm -rf /var/lib/apt/lists/*
 
+# Japanese font:
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         fonts-takao-gothic \
