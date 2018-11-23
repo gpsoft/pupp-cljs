@@ -53,12 +53,34 @@ RUN apt-get update \
         fonts-takao-gothic \
     && rm -rf /var/lib/apt/lists/*
 
-# # leiningen
-# ENV LEIN_ROOT=1
-# RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein \
-#     && chmod 755 lein \
-#     && mv lein /usr/local/bin \
-#     && lein self-install
+
+# openjdk:
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        bzip2 \
+        unzip \
+        xz-utils \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV LANG C.UTF-8
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+ENV JAVA_VERSION 8u181
+ENV JAVA_DEBIAN_VERSION 8u181-b13-2~deb9u1
+ENV CA_CERTIFICATES_JAVA_VERSION 20170531+nmu1
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        openjdk-8-jdk="$JAVA_DEBIAN_VERSION" \
+        ca-certificates-java="$CA_CERTIFICATES_JAVA_VERSION" \
+    && rm -rf /var/lib/apt/lists/*
+RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
+
+# leiningen
+ENV LEIN_ROOT=1
+RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein \
+    && chmod 755 lein \
+    && mv lein /usr/local/bin \
+    && lein self-install
 
 # # boot
 # ENV BOOT_AS_ROOT=yes

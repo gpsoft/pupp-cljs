@@ -24,6 +24,7 @@ test:
 		--env HOST_GID=`id -g` \
 		--env HOST_UID=`id -u` \
 		--volume $(shell pwd):/home/$(USER)/proj \
+		--volume ~/.m2:/home/$(USER)/.m2 \
 		--hostname $(CONTAINERNAME) \
 		--name $(CONTAINERNAME) \
 		--workdir /home/$(USER)/proj \
