@@ -13,27 +13,15 @@ all:
 image:
 	docker build --tag=$(IMAGENAME) .
 
-test:
+# Start development
+.PHONY: dev attach stop
+dev:
 	xhost +local:$(USER)
 	docker run --rm -it \
 		--env="DISPLAY" \
 		--env="QT_X11_NO_MITSHM=1" \
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--env NPM_CONFIG_PREFIX=/home/$(USER)/.npm-global \
-		--env HOST_USER=$(USER) \
-		--env HOST_GID=`id -g` \
-		--env HOST_UID=`id -u` \
-		--volume $(shell pwd):/home/$(USER)/proj \
-		--volume ~/.m2:/home/$(USER)/.m2 \
-		--hostname $(CONTAINERNAME) \
-		--name $(CONTAINERNAME) \
-		--workdir /home/$(USER)/proj \
-		$(IMAGENAME) /root/dev.sh
-
-# Start development
-.PHONY: dev attach
-dev:
-	docker run --rm -it \
 		--env HOST_USER=$(USER) \
 		--env HOST_GID=`id -g` \
 		--env HOST_UID=`id -u` \
@@ -54,6 +42,7 @@ attach:
 		--user $(USER) \
 		$(CONTAINERNAME) bash
 
+# Stop development
 stop:
 	xhost -local:$(USER)
 

@@ -17,12 +17,12 @@ chown $HOST_USER:$HOST_USER \
 chmod 644 /home/$HOST_USER/.bashrc
 
 # Bring clojure tooling environment from root
-# cp -r /root/.lein /root/.boot /root/.clojure \
-#     /home/$HOST_USER/
-# chown -R $HOST_USER:$HOST_USER \
-#     /home/$HOST_USER/.lein \
-#     /home/$HOST_USER/.boot \
-#     /home/$HOST_USER/.clojure
+cp -r /root/.lein /root/.boot /root/.clojure \
+    /home/$HOST_USER/
+chown -R $HOST_USER:$HOST_USER \
+    /home/$HOST_USER/.lein \
+    /home/$HOST_USER/.boot \
+    /home/$HOST_USER/.clojure
 
 # Switch to the user
 su $HOST_USER

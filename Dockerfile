@@ -82,23 +82,23 @@ RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/l
     && mv lein /usr/local/bin \
     && lein self-install
 
-# # boot
-# ENV BOOT_AS_ROOT=yes
-# RUN wget -q https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh \
-#     && chmod 755 boot.sh \
-#     && mv boot.sh /usr/local/bin/boot \
-#     && boot --update
+# boot
+ENV BOOT_AS_ROOT=yes
+RUN wget -q https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh \
+    && chmod 755 boot.sh \
+    && mv boot.sh /usr/local/bin/boot \
+    && boot --update
 
-# # clojure cli tools
-# RUN wget -q -O install.sh https://download.clojure.org/install/linux-install-1.9.0.381.sh \
-#     && bash install.sh -p /usr/local \
-#     && rm install.sh
+# clojure cli tools
+RUN wget -q -O install.sh https://download.clojure.org/install/linux-install-1.9.0.397.sh \
+    && bash install.sh -p /usr/local \
+    && rm install.sh
 
-# # port for web, figwheel, and nrepl
-# EXPOSE 8080
-# EXPOSE 3000
-# EXPOSE 3449
-# EXPOSE 3575
+# port for web, figwheel, and nrepl
+EXPOSE 8080
+EXPOSE 3000
+EXPOSE 3449
+EXPOSE 3575
 
 # for convenience
 COPY ./.bashrc /root/
@@ -110,6 +110,6 @@ RUN chmod 755 /root/dev.sh
 RUN deluser --remove-home node
 
 # clojure tooling environment
-# COPY profiles.clj /root/.lein/
-# COPY profile.boot /root/.boot/
-# COPY deps.edn /root/.clojure/
+COPY profiles.clj /root/.lein/
+COPY profile.boot /root/.boot/
+COPY deps.edn /root/.clojure/
