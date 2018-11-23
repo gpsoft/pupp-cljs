@@ -7,13 +7,18 @@ all:
 	@echo make image
 	@echo make dev
 	@echo make attach
+	@echo make stop
 
 # Build a docker image.
 image:
 	docker build --tag=$(IMAGENAME) .
 
 test:
+	xhost +local:$(USER)
 	docker run --rm -it \
+		--env="DISPLAY" \
+		--env="QT_X11_NO_MITSHM=1" \
+		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--env HOST_USER=$(USER) \
 		--env HOST_GID=`id -g` \
 		--env HOST_UID=`id -u` \
@@ -46,6 +51,9 @@ attach:
 	docker exec -it \
 		--user $(USER) \
 		$(CONTAINERNAME) bash
+
+stop:
+	xhost -local:$(USER)
 
 .SILENT:
 %:
