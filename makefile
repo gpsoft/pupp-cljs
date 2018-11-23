@@ -19,6 +19,7 @@ test:
 		--env="DISPLAY" \
 		--env="QT_X11_NO_MITSHM=1" \
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+		--env NPM_CONFIG_PREFIX=/home/$(USER)/.npm-global \
 		--env HOST_USER=$(USER) \
 		--env HOST_GID=`id -g` \
 		--env HOST_UID=`id -u` \
