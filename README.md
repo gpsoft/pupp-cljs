@@ -69,12 +69,10 @@ cljs.user=> (p/let [opts {:args ["--no-sandbox"
 cljs.user=>
 ```
 
+# memo
 
+カーネル4.19.2でDockerイメージのビルドに失敗。https://github.com/docker/for-linux/issues/480
 
-for kernel 4.19.1 or 4.19.2
+```
 host $ echo N |sudo tee /sys/module/overlay/parameters/metacopy
-
-
-container $ lein cljsbuild once
-container $ node out/main.js
-
+```
