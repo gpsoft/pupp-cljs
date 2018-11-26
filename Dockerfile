@@ -53,8 +53,7 @@ RUN apt-get update \
         fonts-takao-gothic \
     && rm -rf /var/lib/apt/lists/*
 
-
-# openjdk:
+# OpenJDK:
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         bzip2 \
@@ -75,21 +74,21 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
-# leiningen
+# Leiningen
 ENV LEIN_ROOT=1
 RUN wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein \
     && chmod 755 lein \
     && mv lein /usr/local/bin \
     && lein self-install
 
-# boot
+# Boot
 ENV BOOT_AS_ROOT=yes
 RUN wget -q https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh \
     && chmod 755 boot.sh \
     && mv boot.sh /usr/local/bin/boot \
     && boot --update
 
-# clojure cli tools
+# Clojure cli tools
 RUN wget -q -O install.sh https://download.clojure.org/install/linux-install-1.9.0.397.sh \
     && bash install.sh -p /usr/local \
     && rm install.sh
