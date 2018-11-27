@@ -71,8 +71,14 @@ cljs.user=>
 
 # memo
 
+## Dockerイメージをビルドできない
+
 カーネル4.19.2でDockerイメージのビルドに失敗。https://github.com/docker/for-linux/issues/480
 
 ```
 host $ echo N |sudo tee /sys/module/overlay/parameters/metacopy
 ```
+
+## Chromeのウィンドウがホスト側に出ない
+
+`openjdk-8-jdk`を入れると、headlessオフのChromeがうまくいかない。無地の矩形が出るが、その先に進まない感じ。
