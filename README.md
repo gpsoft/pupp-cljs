@@ -82,3 +82,21 @@ host $ echo N |sudo tee /sys/module/overlay/parameters/metacopy
 ## Chromeのウィンドウがホスト側に出ない
 
 `openjdk-8-jdk`を入れると、headlessオフのChromeがうまくいかない。無地の矩形が出るが、その先に進まない感じ。
+
+## cljsからChromeを起動できない
+
+Puppeteerの1.10.0だと、ダメみたい。
+
+```
+(node:915) UnhandledPromiseRejectionWarning: TypeError: Cannot read property '_launcher' of null
+    at launch (/home/maru/proj/node_modules/puppeteer/lib/Puppeteer.js:36:17)
+    at /home/maru/proj/out/compiled/pupp_cljs/main.js:8:89
+    at process._tickCallback (internal/process/next_tick.js:43:7)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:778:11)
+    at startup (internal/bootstrap/node.js:300:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:826:3)
+```
+
+1.0.0ならOK。
+
+
