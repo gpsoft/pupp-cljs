@@ -1,36 +1,33 @@
 (ns pupp-cljs.main
   (:require [kitchen-async.promise :as p]
-            puppeteer))
+            [pupp-cljs.pupp :as pupp]))
+
+(defn- dump
+  [prms]
+  (p/let [v prms]
+    (prn v)))
+
+(defn- take-ss-on-google
+  [fpath]
+  (pupp/with-page
+    (fn [page]
+      (p/do
+        (pupp/goto "https://www.google.com")
+        (pupp/take-ss fpath)))))
+
+(defn- testing []
+  (pupp/with-page
+    (fn [page]
+      (p/do
+        (pupp/goto "https://www.google.com")
+        (dump (pupp/attr "input[type=submit]" "value"))
+        (dump (pupp/inp-val "input[type=submit]"))
+        (dump (pupp/content "div.FPdoLc"))
+        ))))
 
 (defn main []
-  (p/let [opts {:args ["--no-sandbox"
-                       "--disable-setuid-sandbox"]}
-          browser (puppeteer/launch (clj->js opts))
-          page (.newPage browser)]
-    (.goto page "https://www.google.com")
-    (.screenshot page #js {:path "google.png"})
-    (.close browser)))
+  #_(take-ss-on-google "fuga.png")
+  (testing)
+  )
 
 (set! *main-cli-fn* main)
-
-(comment
-  (defn- ss
-  [page fpath]
-  (.screenshot page #js {:path (str "ss/" fpath) :fullPage true}))
-
-(defn- waitTransit
-  [page sel]
-  (.waitFor page sel #js {:timeout 10000}))
-
-(defn- inp-val
-  [page sel]
-  (.$eval page sel #(.-value %)))
-
-(defn- content
-  [page sel]
-  (.$eval page sel #(.-textContent %)))
-
-(defn- attr
-  [page sel attr-name]
-  (.$eval page sel #(.getAttribute %1 %2) attr-name))
-)
