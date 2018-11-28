@@ -12,3 +12,25 @@
     (.close browser)))
 
 (set! *main-cli-fn* main)
+
+(comment
+  (defn- ss
+  [page fpath]
+  (.screenshot page #js {:path (str "ss/" fpath) :fullPage true}))
+
+(defn- waitTransit
+  [page sel]
+  (.waitFor page sel #js {:timeout 10000}))
+
+(defn- inp-val
+  [page sel]
+  (.$eval page sel #(.-value %)))
+
+(defn- content
+  [page sel]
+  (.$eval page sel #(.-textContent %)))
+
+(defn- attr
+  [page sel attr-name]
+  (.$eval page sel #(.getAttribute %1 %2) attr-name))
+)
