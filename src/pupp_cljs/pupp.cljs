@@ -15,6 +15,10 @@
     (.screenshot page
                  #js {:path fpath
                       :fullPage true})))
+(defn click
+  [sel]
+  (when-let [page @the-page]
+    (.click page sel)))
 
 (defn wait-transit
   [sel]
@@ -22,6 +26,16 @@
     (.waitFor page
               sel
               #js {:timeout 10000})))
+
+(defn type-in
+  [sel s]
+  (when-let [page @the-page]
+    (.type page sel s)))
+
+(defn select
+  [sel v]
+  (when-let [page @the-page]
+    (.select page sel v)))
 
 (defn inp-val
   [sel]
@@ -42,6 +56,11 @@
   (when-let [page @the-page]
     (.$eval page sel #(.getAttribute %1 %2) attr-name)))
 
+(defn on-dlg
+  [f]
+  (when-let [page @the-page]
+    (.on page "dialog" f)))
+
 (defn with-page
   ([f] (with-page false f))
   ([headful? f]
@@ -53,4 +72,3 @@
      (reset! the-page page)
      (f page)
      (.close browser))))
-
