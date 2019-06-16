@@ -18,7 +18,7 @@ image:
 dev:
 	xhost +local:$(USER)
 	docker run --rm -it \
-		--env="DISPLAY" \
+		--env="DISPLAY=:1" \
 		--env="QT_X11_NO_MITSHM=1" \
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--env NPM_CONFIG_PREFIX=/home/$(USER)/.npm-global \
@@ -35,7 +35,7 @@ dev:
 		--hostname $(CONTAINERNAME) \
 		--name $(CONTAINERNAME) \
 		--workdir /home/$(USER)/proj \
-		$(IMAGENAME) /root/dev.sh
+		$(IMAGENAME) bash
 
 # Attach to the running container.
 attach:

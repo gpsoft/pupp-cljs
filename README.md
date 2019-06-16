@@ -5,6 +5,7 @@ ClojureScriptでPuppeteerを使う。環境はDockerコンテナに入れる。�
 - [Puppeteer(https://github.com/GoogleChrome/puppeteer)](https://github.com/GoogleChrome/puppeteer)
 - [Dockerコンテナ上でGUIプログラムを動かす方法(http://wiki.ros.org/docker/Tutorials/GUI)](http://wiki.ros.org/docker/Tutorials/GUI)
 - [Puppeteerが起動しないとき(https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md)](https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md)
+- [Promiseを多用するJSライブラリをClojureScriptから使う(https://github.com/athos/kitchen-async)](https://github.com/athos/kitchen-async)
 
 # Usage
 
@@ -40,7 +41,7 @@ $ node index.js
 $ ll yahoo.png
 ```
 
-ヤフーのトップページのスクリーンショットが`yahoo.png`へ保存される。
+ヤフーのトップページのスクリーンショットが`yahoo.png`へ保存されてる。
 
 ## ClojureScriptバージョン
 
@@ -81,7 +82,7 @@ host $ echo N |sudo tee /sys/module/overlay/parameters/metacopy
 
 ## Chromeのウィンドウがホスト側に出ない
 
-`openjdk-8-jdk`を入れると、headlessオフのChromeがうまくいかない。無地の矩形が出るが、その先に進まない感じ。
+`openjdk-8-jdk`を入れると、headlessオフのChromeがうまくいかない。無地の矩形が出るが、その先に進まない感じ。GUIが全滅というわけじゃなくて、`dclock`とかはちゃんと出る。
 
 ## cljsからChromeを起動できない
 
