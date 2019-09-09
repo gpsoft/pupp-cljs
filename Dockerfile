@@ -1,9 +1,10 @@
-FROM node:11.2.0-stretch
+FROM node:12.10.0-stretch
 
 WORKDIR /root
 
 # Libs for puppeteer:
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#chrome-headless-doesnt-launch
+ENV DEBCONF_NOWARNINGS yes
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         gconf-service \
@@ -63,9 +64,10 @@ RUN apt-get update \
 
 ENV LANG C.UTF-8
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
-ENV JAVA_VERSION 8u181
-ENV JAVA_DEBIAN_VERSION 8u181-b13-2~deb9u1
-ENV CA_CERTIFICATES_JAVA_VERSION 20170531+nmu1
+ENV JAVA_VERSION 8u222
+ENV JAVA_DEBIAN_VERSION 8u222-b10-1~deb9u1
+# ENV CA_CERTIFICATES_JAVA_VERSION 20170531+nmu1
+ENV CA_CERTIFICATES_JAVA_VERSION 20170929~deb9u3
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
