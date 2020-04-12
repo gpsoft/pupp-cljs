@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "lodash": "^4.17.13",
+    "acorn": "^5.7.4",
     "@cljs-oss/module-deps": "^1.1.1",
-    "puppeteer": "^1.19.0"
+    "puppeteer": "^1.20.0"
   }
 }
